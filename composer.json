@@ -2,7 +2,7 @@
     "name": "so/kp-code-refactor",
     "autoload": {
         "psr-4": {
-            "So\\KpCodeRefactor\\": "src/"
+            "App\\": "src/"
         },
         "files": [
             "src/Core/helpers.php"
