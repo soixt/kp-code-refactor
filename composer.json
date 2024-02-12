@@ -1,0 +1,15 @@
+{
+    "name": "so/kp-code-refactor",
+    "autoload": {
+        "psr-4": {
+            "So\\KpCodeRefactor\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "SOIX",
+            "email": "sasa@infinity-x.tech"
+        }
+    ],
+    "require": {}
+}
