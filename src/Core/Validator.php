@@ -20,7 +20,7 @@ class Validator {
 
                 // Perform validation based on attribute instance
                 if (!$attributeInstance->validate($dto->$propertyName)) {
-                    $errors[$propertyName][] = $attributeInstance->message();
+                    $errors[$propertyName][] = $attributeInstance->getMessage();
                 }
             }
         }

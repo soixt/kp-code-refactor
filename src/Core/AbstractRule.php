@@ -7,19 +7,20 @@ use App\Core\Interfaces\RuleInterface;
 #[\Attribute]
 abstract class AbstractRule implements RuleInterface
 {
-    protected string $defaultMessage = 'The validation failed.';
+    protected string $message = 'The :field validation failed.';
 
-    public function __construct() {
-
-    }
-
-    public function message($message = ''): string
+    public function getMessage($field): string
     {
-        return $message ?? $this->defaultMessage;
+        return str_replace(':field', $field, $this->message);
     }
 
     public function validate($value): bool
     {
         return false;
+    }
+
+    public function setMessage ($message):void
+    {
+        $this->message = $message;
     }
 }
