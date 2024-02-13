@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-use App\Core\Rules\AbstractRepository;
+use App\Core\AbstractRepository;
 use App\DTOs\RegisterDTO;
 use App\Entities\UserEntity;
 
@@ -17,12 +17,21 @@ class UserRepository extends AbstractRepository {
         if ($user) {
             return new UserEntity(
                 $user->id,
-                $user->name,
                 $user->email,
                 $user->password
             );
         }
 
         return null;
+    }
+
+    public function createTableIfNotExists(): void {
+        $sql = "CREATE TABLE IF NOT EXISTS user (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            password VARCHAR(255) NOT NULL
+        )";
+    
+        $this->database->query($sql);
     }
 }

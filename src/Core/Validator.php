@@ -15,12 +15,12 @@ class Validator {
             $attributes = $property->getAttributes();
 
             foreach ($attributes as $attribute) {
-                $attributeName = $attribute->getName();
-                $attributeInstance = $attribute->newInstance();
+                $attributeClass = $attribute->getName();
+                $attributeInstance = new $attributeClass($dto, ...$attribute->getArguments());
 
                 // Perform validation based on attribute instance
-                if (!$attributeInstance->validate($dto->$propertyName)) {
-                    $errors[$propertyName][] = $attributeInstance->getMessage();
+                if (!$attributeInstance->validate($propertyName)) {
+                    $errors[$propertyName][] = $attributeInstance->getMessage($propertyName);
                 }
             }
         }

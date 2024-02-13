@@ -28,7 +28,7 @@ class Router {
 
     public function handleRoute ($request) {
         $data = parse_url($request);
-        $route = $this->match($this->requestMethod, $data['uri']);
+        $route = $this->match($this->requestMethod, $data['path']);
 
         if ($route) {
             $controller = $route[0];
@@ -53,18 +53,13 @@ class Router {
             $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
             
             foreach ($methods as $method) {
-                $attributes = $method->getAttributes();
-                
-                foreach ($attributes as $attribute) {
-                    $attributeName = $attribute->getName();
-                    
-                    if ($attributeName === 'Route') {
-                        $routerAttribute = $attribute->newInstance();
-                        $path = $routerAttribute->path;
-                        $requestMethod = $routerAttribute->requestType;
+                $attributes = $method->getAttributes('App\Core\Route');
+                if (count($attributes) && $attribute = $attributes[0]) {
+                    $routerAttribute = $attribute->newInstance();
+                    $path = $routerAttribute->path;
+                    $requestMethod = $routerAttribute->requestType;
 
-                        $this->addRoute($requestMethod, $path, [$controller, $method->getName()]);
-                    }
+                    $this->addRoute($requestMethod, $path, [$controller, $method->getName()]);
                 }
             }
         }

@@ -1,17 +1,21 @@
 <?php
 
-namespace App\Core\Rules;
+namespace App\Core;
 
+use App\Core\Database\Database;
 use App\Core\Database\Interfaces\DatabaseAdapterInterface;
 use App\Core\Interfaces\RepositoryInterface;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
-    public function __construct(protected DatabaseAdapterInterface $database) {}
+    protected DatabaseAdapterInterface $database;
+    public function __construct() {
+        $this->database = Database::getInstance()->getConnection();
+    }
 
     public function findBy(string $field, string $value): ?array
     {
-        $query = $this->database->query("SELECT * FROM users WHERE $field = :value", [
+        $query = $this->database->query("SELECT * FROM user WHERE $field = :value", [
             'value' => $value
         ]);
  
@@ -24,7 +28,7 @@ abstract class AbstractRepository implements RepositoryInterface
 
     public function findLastBy(string $field, string $value): mixed
     {
-        $query = $this->database->query("SELECT * FROM users WHERE $field = :value ORDER BY id DESC LIMIT 1", [
+        $query = $this->database->query("SELECT * FROM user WHERE $field = :value ORDER BY id DESC LIMIT 1", [
             'value' => $value
         ]);
  

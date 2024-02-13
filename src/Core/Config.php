@@ -7,7 +7,7 @@ class Config {
 
     public function __construct() {
         // Get list of configuration files
-        $configFiles = glob('config/*.php');
+        $configFiles = glob(__DIR__ . '/../../config/*.php');
         
         foreach ($configFiles as $configFile) {
             // Load configuration file

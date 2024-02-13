@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Rules;
+namespace App\Core;
 
 use App\Core\Interfaces\RuleInterface;
 
@@ -8,6 +8,7 @@ use App\Core\Interfaces\RuleInterface;
 abstract class AbstractRule implements RuleInterface
 {
     protected string $message = 'The :field validation failed.';
+    public function __construct(protected AbstractDTO $dto) {}
 
     public function getMessage($field): string
     {

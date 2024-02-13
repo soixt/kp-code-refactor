@@ -9,20 +9,26 @@ use App\DTOs\RegisterDTO;
 use App\Repositories\UserRepository;
 
 class RegisterController {
+    protected Validator $validator;
+
+    public function __construct() {
+        $this->validator = new Validator();
+    }
+
     #[Route(path: '/', name: 'home', requestType: 'GET')]
     public function index(): void {
         echo 'Home page';
     }
 
     #[Route(path: '/register', name: 'register', requestType: 'POST')]
-    public function register(Validator $validator, UserRepository $userRepository): void {
+    public function register() {
         $dto = new RegisterDTO([
             'email' => $_REQUEST['email'],
             'password' => $_REQUEST['password'],
             'password2' => $_REQUEST['password2'],
         ]);
 
-        $errors = $validator->validate($dto);
+        $errors = $this->validator->validate($dto);
 
         if (!empty($errors)) {
             return response([
@@ -30,6 +36,8 @@ class RegisterController {
                 'errors' => $errors
             ]);
         }
+
+        $userRepository = new UserRepository;
 
         $newUser = $userRepository->createNewUser($dto);
 

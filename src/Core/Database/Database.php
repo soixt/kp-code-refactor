@@ -13,7 +13,8 @@ class Database {
 
     private function __construct() {
         $dbConfig = Config::get('database.connection');
-        $adapterConfig = Config::get('database.' . $dbConfig);
+
+        $adapterConfig = Config::get('database.connections.' . $dbConfig);
 
         // Determine the appropriate adapter based on the database configuration
         switch ($dbConfig) {

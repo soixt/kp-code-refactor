@@ -2,7 +2,7 @@
 
 if (!function_exists('env')) {
     function env (string $key, mixed $default = '') {
-        return getenv($key) ?? $default;
+        return $_ENV[$key] ?? $default;
     }
 }
 
