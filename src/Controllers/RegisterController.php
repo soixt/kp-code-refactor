@@ -3,9 +3,11 @@
 namespace App\Controllers;
 
 use App\Core\Enums\ApplicationEnvironment;
+use App\Core\Enums\UserLogAction;
 use App\Core\Route;
 use App\Core\Validator;
 use App\DTOs\RegisterDTO;
+use App\Repositories\UserLogRepository;
 use App\Repositories\UserRepository;
 
 class RegisterController {
@@ -40,6 +42,10 @@ class RegisterController {
         $userRepository = new UserRepository;
 
         $newUser = $userRepository->createNewUser($dto);
+
+        $userLogRepository = new UserLogRepository;
+
+        $userLogRepository->newLog($newUser->getId(), UserLogAction::REGISTER->value);
 
         if (config('app.env') === ApplicationEnvironment::PROD) {
             mail(
