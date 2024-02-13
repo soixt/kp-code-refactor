@@ -1,4 +1,4 @@
-### How we refactored iditial code from INITIAL CODE file.
+### How we refactored initial code from INITIAL CODE file.
 
 1. Defined a good folder structure by adding all functionalities into `src` folder, application entry point into `public` folder, any configurations into `config` folder and added `composer.json` for autoloading.
 2. We added dotenv package for manipulating with our enviroment variables which should never be hardcoded for security purposes.
