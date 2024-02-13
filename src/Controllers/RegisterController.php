@@ -45,7 +45,7 @@ class RegisterController {
 
         $userLogRepository = new UserLogRepository;
 
-        $userLogRepository->newLog($newUser->getId(), UserLogAction::REGISTER->value);
+        $userLogRepository->newLog($newUser->getId(), UserLogAction::REGISTER);
 
         if (config('app.env') === ApplicationEnvironment::PROD) {
             mail(
