@@ -30,3 +30,11 @@ if (!function_exists('abort')) {
         die();
     }
 }
+
+if (!function_exists('response')) {
+    function response (array $data = ['success' => true]) {
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        die();
+    }
+}

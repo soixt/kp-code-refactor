@@ -7,9 +7,12 @@ use ReflectionMethod;
 
 class Router {
     private array $routes = [];
+    protected string $requestMethod;
 
     public function __construct() {
         $this->generateRoutes();
+        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
+        $this->handleRoute($_SERVER['REQUEST_URI']);
     }
 
     public function addRoute(string $method, string $path, array $controller): void {
@@ -21,6 +24,22 @@ class Router {
             return $this->routes[$method][$uri];
         }
         return null;
+    }
+
+    public function handleRoute ($request) {
+        $data = parse_url($request);
+        $route = $this->match($this->requestMethod, $data['uri']);
+
+        if ($route) {
+            $controller = $route[0];
+            $method = $route[1];
+        
+            // Instantiate the controller and call the method
+            $controllerInstance = new $controller();
+            $controllerInstance->$method();
+        } else {
+            abort();
+        }
     }
 
     public function getRoutes(): array {
