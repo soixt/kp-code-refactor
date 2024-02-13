@@ -8,7 +8,7 @@ class UserLogRepository extends AbstractRepository {
     public function newLog (string|int $userID, UserLogAction $action) {
         $this->insert("INSERT INTO user_log (action, user_id) VALUES (:action, :user_id)", [
             'action' => $action->getLabel(),
-            'userId' => $userID,
+            'user_id' => $userID,
         ]);
     }
 
