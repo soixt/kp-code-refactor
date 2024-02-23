@@ -5,7 +5,7 @@ namespace App\Database\Migrations;
 use App\Core\Database\Interfaces\DatabaseAdapterInterface;
 use App\Core\Migrations\AbstractMigration;
 
-class CreateUserTableMigration extends AbstractMigration
+class CreateUserLogTableMigration extends AbstractMigration
 {
     /**
      * Constructor.
@@ -25,13 +25,15 @@ class CreateUserTableMigration extends AbstractMigration
      */
     public function up(): string|array
     {
-        // Define the SQL query to create the user table
+        // Define the SQL query to create the user log table
         return "
-            CREATE TABLE IF NOT EXISTS user (
+            CREATE TABLE IF NOT EXISTS user_log (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                email VARCHAR(255) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL
-            );
+                action VARCHAR(255) NOT NULL,
+                user_id INT NOT NULL,
+                log_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES user(id)
+            )
         ";
     }
 }

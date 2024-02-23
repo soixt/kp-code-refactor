@@ -25,19 +25,4 @@ class UserLogRepository extends AbstractRepository {
             'user_id' => $userID,
         ]);
     }
-
-    /**
-     * Create the user log table if it does not exist.
-     */
-    public function createTableIfNotExists(): void {
-        $sql = "CREATE TABLE IF NOT EXISTS user_log (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            action VARCHAR(255) NOT NULL,
-            user_id INT NOT NULL,
-            log_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES user(id)
-        )";
-    
-        $this->database->query($sql);
-    }
 }
