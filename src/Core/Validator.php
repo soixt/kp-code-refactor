@@ -4,7 +4,18 @@ namespace App\Core;
 
 use ReflectionClass;
 
+/**
+ * Validator class.
+ *
+ * This class is responsible for validating data transfer objects (DTOs) based on defined validation rules.
+ */
 class Validator {
+    /**
+     * Validate a data transfer object (DTO).
+     *
+     * @param object $dto The data transfer object (DTO) to validate.
+     * @return array An associative array containing validation errors, if any.
+     */
     public function validate(object $dto): array {
         $errors = [];
         $reflectionClass = new ReflectionClass($dto::class);

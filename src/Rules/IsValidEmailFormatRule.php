@@ -4,10 +4,24 @@ namespace App\Rules;
 
 use App\Core\AbstractRule;
 
+/**
+ * IsValidEmailFormatRule class.
+ *
+ * This class represents a validation rule for ensuring that a field contains a valid email address format.
+ */
 #[\Attribute]
 class IsValidEmailFormatRule extends AbstractRule {
+    /**
+     * The default error message for when the field does not contain a valid email address format.
+     */
     protected string $message = 'The :field must be a valid email address.';
     
+    /**
+     * Validate the field value to ensure it contains a valid email address format.
+     *
+     * @param mixed $field The value of the field to validate.
+     * @return bool Returns true if the field contains a valid email address format, false otherwise.
+     */
     public function validate($field): bool {
         // Perform the validation based on the provided regex pattern
         // The regex pattern for validating email addresses
