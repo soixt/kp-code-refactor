@@ -21,9 +21,10 @@ class Router {
      * Constructor.
      *
      * Initializes the router by generating routes and extracting the request method from the server.
+     * @param array $controllers The list of all usable controllers.
      */
-    public function __construct() {
-        $this->generateRoutes();
+    public function __construct(array $controllers = []) {
+        $this->generateRoutes($controllers);
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
         $this->handleRoute($_SERVER['REQUEST_URI']);
     }
@@ -87,11 +88,10 @@ class Router {
 
     /**
      * Generate routes based on controller methods annotated with Route attributes.
-     *
+     * @param array $controllers Including list of usable controllers
      * @return void
      */
-    public function generateRoutes(): void {
-        $controllers = config('controllers') ?? [];
+    public function generateRoutes(array $controllers = []): void {
         foreach ($controllers as $controller) {
             $reflection = new ReflectionClass($controller);
             $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);

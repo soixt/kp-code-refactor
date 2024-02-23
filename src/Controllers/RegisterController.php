@@ -38,10 +38,10 @@ class RegisterController {
      * Register Action
      * Handles user registration requests.
      * Validates user input, creates a new user, logs the registration action, sends a confirmation email (in production), and sets the user session.
-     * @return array JSON response indicating success or failure of the registration process.
+     * @return void JSON response indicating success or failure of the registration process.
      */
     #[Route(path: '/register', name: 'register', requestType: 'POST')]
-    public function register() {
+    public function register():void {
         // Create a DTO object with user registration data
         $dto = new RegisterDTO([
             'email' => $_REQUEST['email'],
@@ -54,7 +54,7 @@ class RegisterController {
 
         // If validation errors exist, return error response
         if (!empty($errors)) {
-            return response([
+            response([
                 'success' => false,
                 'errors' => $errors
             ]);
@@ -82,7 +82,7 @@ class RegisterController {
         $_SESSION['userId'] = $newUser->getId();
 
         // Return success response
-        return response([
+        response([
             'success' => true,
             'userId' => $newUser->getId()
         ]);
