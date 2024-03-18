@@ -4,9 +4,9 @@ require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
 
-use App\Core\ExceptionHandler;
-use App\Core\Logger;
-use App\Core\Router;
+use App\Infrastructure\Classes\ExceptionHandler;
+use App\Infrastructure\Logging\Logger;
+use App\Infrastructure\Routing\Router;
 
 // Load environment variables from .env file
 $dotenv = Dotenv\Dotenv::createImmutable(config('app.root'));

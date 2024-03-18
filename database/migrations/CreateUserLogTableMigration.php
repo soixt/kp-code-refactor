@@ -2,8 +2,8 @@
 
 namespace App\Database\Migrations;
 
-use App\Core\Database\Interfaces\DatabaseAdapterInterface;
-use App\Core\Migrations\AbstractMigration;
+use App\Infrastructure\Database\AbstractMigration;
+use App\Infrastructure\Database\Interfaces\DatabaseAdapterInterface;
 
 class CreateUserLogTableMigration extends AbstractMigration
 {

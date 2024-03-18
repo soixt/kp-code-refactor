@@ -12,5 +12,6 @@ return [
      * Root Directory Configuration
      * The root directory of the application.
      */
-    'root' => __DIR__ . '../'
+    'root' => __DIR__ . '../',
+    'migrations_path' => __DIR__ . '../database/migrations/',
 ];

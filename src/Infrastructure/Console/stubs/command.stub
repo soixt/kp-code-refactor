@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Domain\Commands;
+
+use App\Infrastructure\Console\AbstractCommand as Command;
+
+class {{ fileName }}Command extends Command {
+    protected string $name = 'run:{{ fileName }}';
+    
+    /**
+     * Handle command
+     * 
+     * @param mixed ...$args Additional arguments.
+     * @return void
+     */
+    public function handle(...$args): void {
+        
+    }
+}

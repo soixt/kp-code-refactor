@@ -1,28 +1,17 @@
 <?php
 
-$commands = [
-    'migrate:fresh' => function () {
-        // Assuming you have a class like this
-        $migrationCommand = new \App\Commands\InitDatabaseCommand();
-        $migrationCommand->handle();
-    },
-    'migrate' => function () {
-        // Assuming you have a class like this
-        $migrationCommand = new \App\Commands\MigrateDatabaseCommand();
-        $migrationCommand->handle();
-    },
-    'another-command' => function () {
-        // Another command handling
-    },
-    // ... more commands
-];
+require __DIR__ . '/../vendor/autoload.php';
+
+$console = new \App\Infrastructure\Console\Console();
+$commands = $console->getRegistry();
 
 // Get the command from the first argument
 $commandName = $argv[1] ?? null;
+unset($argv[1]);
 
 // Execute the command if it exists
 if (array_key_exists($commandName, $commands)) {
-    $commands[$commandName]();
+    $commands[$commandName]->handle($argv);
 } else {
     echo "Unknown command: {$commandName}\n";
     echo "Available commands:\n";
